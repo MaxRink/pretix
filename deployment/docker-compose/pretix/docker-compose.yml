@@ -31,8 +31,8 @@ services:
       - internal
       - external
     environment:
-      VIRTUAL_HOST: pretix.chaos-party-ulm.de,tickets.chaos-party-ulm.de
-      LETSENCRYPT_HOST: pretix.chaos-party-ulm.de,tickets.chaos-party-ulm.de
+      VIRTUAL_HOST: pretix.chaos-party-ulm.de
+      LETSENCRYPT_HOST: pretix.chaos-party-ulm.de
       LETSENCRYPT_EMAIL: le@maxrink.de
   task:
     build: .
