@@ -80,6 +80,10 @@ services:
       - nginx-htpasswd:/etc/nginx/htpasswd:ro
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - ./nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl:ro
+    depends_on:
+      - pretix
+    networks:
+      - external
 
 
   nginx-letsencrypt:
