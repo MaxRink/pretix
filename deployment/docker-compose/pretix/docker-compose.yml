@@ -18,8 +18,8 @@ services:
   pretix:
     build: .
     volumes:
-      - ./data:/data
-      - ./static:/pretix/src/pretix/static.dist
+      - pretix-data:/data
+      - static-data:/pretix/src/pretix/static.dist
     depends_on:
       - db
       - redis
@@ -28,24 +28,45 @@ services:
     networks:
       - internal
       - external
+    environment:
+      VIRTUAL_HOST: pretix.chaos-party-ulm.de,tickets.chaos-party-ulm.de
+      LETSENCRYPT_HOST: pretix.chaos-party-ulm.de,tickets.chaos-party-ulm.de
+      LETSENCRYPT_EMAIL: le@maxrink.de
+
  
  
 
   task:
     build: .
     volumes:
-      - ./data:/data
+      - pretix-data:/data
+      - static-data:/static
     depends_on:
       - pretix
     command: ./task-entrypoint.sh
     user: www-data
     networks:
       - internal
+      
+   nginx:
+    image: nginx:latest
+    ports:
+      - "0.0.0.0:80:80"
+      - "0.0.0.0:443:443"
+    volumes:
+      - static-data:/static
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - pretix
+    networks:
+      - external
 
 
 volumes:
+  pretix-data:
   db-data:
-
+  static-data:
+  
 networks:
   internal:
   external:
