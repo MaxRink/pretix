@@ -55,20 +55,19 @@ services:
       - static-data:/static
       - nginx-vhosts:/etc/nginx/vhost.d
       - nginx-webroot:/usr/share/nginx/html
-      - "/var/run/docker.sock:/tmp/docker.sock:ro"
+      - /var/run/docker.sock:/var/run/docker.sock:ro
       - nginx-certs:/etc/nginx/certs:ro
     depends_on:
       - pretix
     networks:
-      - external
-      
+      - external    
       
   letsencrypt-nginx-proxy-companion:
     image: jrcs/letsencrypt-nginx-proxy-companion
     volumes:
       - nginx-vhosts:/etc/nginx/vhost.d
       - nginx-webroot:/usr/share/nginx/html
-      - "/var/run/docker.sock:/tmp/docker.sock:ro"
+      - /var/run/docker.sock:/var/run/docker.sock:ro
       - nginx-certs:/etc/nginx/certs:rw
 
 volumes:
