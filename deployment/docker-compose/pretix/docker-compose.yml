@@ -28,7 +28,7 @@ services:
     networks:
       - internal
       - external
-    ports:
+ 
  
 
   task:
