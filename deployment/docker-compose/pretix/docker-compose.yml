@@ -32,10 +32,6 @@ services:
       VIRTUAL_HOST: pretix.chaos-party-ulm.de,tickets.chaos-party-ulm.de
       LETSENCRYPT_HOST: pretix.chaos-party-ulm.de,tickets.chaos-party-ulm.de
       LETSENCRYPT_EMAIL: le@maxrink.de
-
- 
- 
-
   task:
     build: .
     volumes:
@@ -48,7 +44,7 @@ services:
     networks:
       - internal
       
-   nginx:
+  nginx:
     image: nginx:latest
     ports:
       - "0.0.0.0:80:80"
