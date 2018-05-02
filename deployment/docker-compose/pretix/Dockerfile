@@ -34,4 +34,17 @@ RUN chmod +x pretix-entrypoint.sh task-entrypoint.sh
 RUN pip3 install -r requirements/production.txt
 RUN pip3 install -r requirements/mysql.txt
 RUN pip3 install -r requirements/redis.txt
+
+RUN pip3 install pretix-passbook
+RUN pip3 install pretix-servicefees
+RUN pip3 install pretix-sepadebit
+RUN pip3 install pretix-pages
+RUN pip3 install pretix-fontpack-free
+ENV DJANGO_SETTINGS_MODULE=
+RUN pip3 install pretix-cashpayment
+RUN pip3 install git+https://github.com/rixx/pretix-stretchgoals.git
+ENV DJANGO_SETTINGS_MODULE=production_settings
+RUN pip3 install pretix-wirecard
+RUN pip3 install pretix-sofort
+RUN pip3 install pretix-newsletter-ml
 RUN chown -R www-data:www-data /pretix /etc/pretix /data /static
